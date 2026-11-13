@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Activity, ArrowUpRight, Bell, CheckCircle2, ChevronRight, CreditCard,
-  Home, LayoutGrid, Plus, Send, Settings, ShieldCheck, Wallet, Zap
+  Home, LayoutGrid, Moon, Plus, Send, Settings, ShieldCheck, Sun, Wallet, Zap
 } from "lucide-react";
 import {
   AppHeader, Avatar, Badge, BottomNavigation, BottomSheet, Button, Card,
@@ -21,6 +21,9 @@ function Showcase() {
   const [nav, setNav] = useState("home");
   const [amount, setAmount] = useState("125.00");
   const [loading, setLoading] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
 
   const handleLoading = () => {
     setLoading(true);
@@ -36,7 +39,7 @@ function Showcase() {
 
   return <div className="demo-shell">
     <AppHeader title="Mini App UI Kit" subtitle="Component playground"
-      right={<button className="icon-button" onClick={() => toast.show("You're all caught up", "info")}><Bell size={19} /></button>} />
+      right={<div className="header-actions"><button className="icon-button" aria-label="Toggle theme" onClick={() => setTheme(value => value === "light" ? "dark" : "light")}>{theme === "light" ? <Moon size={18} /> : <Sun size={18} />}</button><button className="icon-button" onClick={() => toast.show("You're all caught up", "info")}><Bell size={19} /></button></div>} />
     <main className="demo-content">
       <section className="hero">
         <div className="hero__eyebrow"><span className="hero__dot" /> TELEGRAM MINI APP DESIGN SYSTEM</div>
@@ -159,6 +162,6 @@ function Showcase() {
 }
 
 export default function App() {
-  useMemo(() => { initTelegram(); return null; }, []);
+  useEffect(() => { initTelegram(); }, []);
   return <ToastProvider><Showcase /></ToastProvider>;
 }
