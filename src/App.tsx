@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import type { FormEvent } from "react";
 import {
   Activity,
   Bell,
@@ -6,11 +7,9 @@ import {
   ChevronRight,
   CreditCard,
   Home,
-  Moon,
   Send,
   Settings,
   ShieldCheck,
-  Sun,
   Wallet,
   Zap
 } from "lucide-react";
@@ -87,7 +86,7 @@ function Showcase() {
     { id: "settings", label: "Settings", icon: <Settings size={19} /> }
   ], []);
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     toast.show("Form submitted", "success");
   };
@@ -455,7 +454,7 @@ function Showcase() {
         </Section>
 
         <footer className="demo-footer">
-          <span>Mini App UI Kit · v0.2.0</span>
+          <span>Mini App UI Kit · v0.1.0</span>
           <span>React · TypeScript · CSS variables</span>
         </footer>
       </PageLayout>
