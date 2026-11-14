@@ -454,7 +454,7 @@ function Showcase() {
         </Section>
 
         <footer className="demo-footer">
-          <span>Mini App UI Kit · v0.1.0</span>
+          <span>Mini App UI Kit · v0.2.0</span>
           <span>React · TypeScript · CSS variables</span>
         </footer>
       </PageLayout>
