@@ -1,11 +1,11 @@
 {
   "name": "telegram-miniapp-ui-kit",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "npm run typecheck && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "typecheck": "tsc --noEmit"
   },
