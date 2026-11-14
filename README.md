@@ -10,19 +10,19 @@ Reusable React + TypeScript components and layout patterns for Telegram Mini App
 
 ## Run the catalogue
 
-\`\`\`bash
+```bash
 npm install
 npm run dev
-\`\`\`
+```
 
 Vite prints the local URL after startup.
 
 ## Verify
 
-\`\`\`bash
+```bash
 npm run typecheck
 npm run build
-\`\`\`
+```
 
 There is no dedicated unit-test runner in this starter yet. The repository CI workflow runs the TypeScript check and production build on pushes and pull requests.
 
@@ -30,7 +30,7 @@ There is no dedicated unit-test runner in this starter yet. The repository CI wo
 
 Import from the public barrel:
 
-\`\`\`tsx
+```tsx
 import {
   AppHeader,
   Avatar,
@@ -58,22 +58,22 @@ import {
   ToastProvider,
   useToast
 } from "./components";
-\`\`\`
+```
 
 Available primitives:
 
-- Actions and inputs: \`Button\`, \`Input\`
-- Surfaces and content: \`Card\`, \`Badge\`, \`Avatar\`, \`Divider\`, \`ListItem\`
-- Selection: \`Tabs\`, \`Switch\`, \`Checkbox\`, \`Radio\`, \`RadioGroup\`
-- States: \`Skeleton\`, \`EmptyState\`
-- Overlays: \`Modal\`, \`BottomSheet\`, \`ToastProvider\`, \`useToast\`
-- Navigation: \`AppHeader\`, \`BottomNavigation\`
-- Layout patterns: \`PageLayout\`, \`Section\`, \`Form\`
-- Telegram adapters: \`TelegramMainButton\`, \`TelegramBackButton\`, \`haptics\`
+- Actions and inputs: `Button`, `Input`
+- Surfaces and content: `Card`, `Badge`, `Avatar`, `Divider`, `ListItem`
+- Selection: `Tabs`, `Switch`, `Checkbox`, `Radio`, `RadioGroup`
+- States: `Skeleton`, `EmptyState`
+- Overlays: `Modal`, `BottomSheet`, `ToastProvider`, `useToast`
+- Navigation: `AppHeader`, `BottomNavigation`
+- Layout patterns: `PageLayout`, `Section`, `Form`
+- Telegram adapters: `TelegramMainButton`, `TelegramBackButton`, `haptics`
 
 ## Example
 
-\`\`\`tsx
+```tsx
 import { Button, Card, Input, ToastProvider, useToast } from "./components";
 
 function ProfileForm() {
@@ -94,11 +94,11 @@ export function App() {
     </ToastProvider>
   );
 }
-\`\`\`
+```
 
 ## Themes and design tokens
 
-All design values are CSS custom properties in \`src/styles/tokens.css\`:
+All design values are CSS custom properties in `src/styles/tokens.css`:
 
 - Light and dark palettes
 - Telegram theme parameter mapping
@@ -107,37 +107,37 @@ All design values are CSS custom properties in \`src/styles/tokens.css\`:
 - Radius, shadow and semantic status tokens
 - Viewport and safe-area variables
 
-Set the root theme attribute to \`light\`, \`dark\` or \`telegram\`:
+Set the root theme attribute to `light`, `dark` or `telegram`:
 
-\`\`\`ts
+```ts
 document.documentElement.dataset.theme = "dark";
-\`\`\`
+```
 
-The Telegram mode reads \`--tg-theme-*\` variables. \`initTelegram()\` also maps \`WebApp.themeParams\`, listens for theme and viewport changes, and synchronizes safe-area insets.
+The Telegram mode reads `--tg-theme-*` variables. `initTelegram()` also maps `WebApp.themeParams`, listens for theme and viewport changes, and synchronizes safe-area insets.
 
 ## Telegram integration
 
-The Telegram bridge script is included in \`index.html\` before the app bundle. Call \`initTelegram()\` once from the app shell; it returns a cleanup function.
+The Telegram bridge script is included in `index.html` before the app bundle. Call `initTelegram()` once from the app shell; it returns a cleanup function.
 
-\`\`\`tsx
+```tsx
 import { useEffect } from "react";
 import { initTelegram } from "./lib/telegram";
 
 useEffect(() => initTelegram(), []);
-\`\`\`
+```
 
 Adapters safely no-op when the app is opened outside Telegram:
 
-\`\`\`tsx
+```tsx
 <TelegramMainButton text="Continue" onClick={submit} />
 <TelegramBackButton onClick={goBack} />
-\`\`\`
+```
 
-Haptic methods: \`haptics.light()\`, \`haptics.medium()\`, \`haptics.success()\`, \`haptics.error()\`, \`haptics.warning()\`, \`haptics.selection()\`.
+Haptic methods: `haptics.light()`, `haptics.medium()`, `haptics.success()`, `haptics.error()`, `haptics.warning()`, `haptics.selection()`.
 
 ## Project structure
 
-\`\`\`text
+```text
 src/
   components/
     index.ts
@@ -150,7 +150,7 @@ src/
     tokens.css
   App.tsx
   main.tsx
-\`\`\`
+```
 
 ## Production notes
 
