@@ -1,6 +1,6 @@
 import {
   ButtonHTMLAttributes,
-  FormHTMLAttributes,
+  HTMLAttributes,
   InputHTMLAttributes,
   ReactNode,
   createContext,
@@ -95,7 +95,7 @@ export function Card({
   children: ReactNode;
   className?: string;
   padding?: "none" | "sm" | "md" | "lg";
-} & React.HTMLAttributes<HTMLDivElement>) {
+} & HTMLAttributes<HTMLDivElement>) {
   return <div {...props} className={["ui-card", "ui-card--" + padding, className].filter(Boolean).join(" ")}>{children}</div>;
 }
 
