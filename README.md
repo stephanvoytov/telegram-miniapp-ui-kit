@@ -1,89 +1,157 @@
 # Telegram Mini App UI Kit
 
-A lightweight, reusable React + TypeScript UI kit for Telegram Mini Apps. The visual language is inspired by clean fintech products: restrained surfaces, clear hierarchy, Telegram blue accents and compact interaction patterns.
+Reusable React + TypeScript components and layout patterns for Telegram Mini Apps. The visual direction follows a compact Telegram-native fintech interface inspired by CryptoBot: Telegram blue, restrained surfaces, system typography and clear interaction states.
 
-## Quick start
+## Requirements
 
-```bash
+- Node.js 20+
+- npm
+- React 18
+
+## Run the catalogue
+
+\`\`\`bash
 npm install
 npm run dev
-```
+\`\`\`
 
-Production build and type check:
+Vite prints the local URL after startup.
 
-```bash
+## Verify
+
+\`\`\`bash
 npm run typecheck
 npm run build
-```
+\`\`\`
 
-## What's included
+There is no dedicated unit-test runner in this starter yet. The repository CI workflow runs the TypeScript check and production build on pushes and pull requests.
 
-- Design tokens with light, dark and Telegram theme modes
-- Button, Input, Card, Badge, Avatar, Divider, Tabs
-- Switch, Checkbox, RadioGroup, ListItem
-- Skeleton, EmptyState, Modal, BottomSheet, Toast
-- AppHeader and BottomNavigation
-- Telegram WebApp adapters for initialization, MainButton, BackButton and haptics
-- Responsive showcase page
+## Components
 
-## Use components
+Import from the public barrel:
 
-Import from `src/components/ui`:
+\`\`\`tsx
+import {
+  AppHeader,
+  Avatar,
+  Badge,
+  BottomNavigation,
+  BottomSheet,
+  Button,
+  Card,
+  Checkbox,
+  Divider,
+  EmptyState,
+  Form,
+  Input,
+  ListItem,
+  Modal,
+  PageLayout,
+  Radio,
+  RadioGroup,
+  Section,
+  Skeleton,
+  Switch,
+  Tabs,
+  TelegramBackButton,
+  TelegramMainButton,
+  ToastProvider,
+  useToast
+} from "./components";
+\`\`\`
 
-```tsx
-import { Button, Card, Input, ToastProvider, useToast } from "./components/ui";
+Available primitives:
 
-function Example() {
-  const { show } = useToast();
+- Actions and inputs: \`Button\`, \`Input\`
+- Surfaces and content: \`Card\`, \`Badge\`, \`Avatar\`, \`Divider\`, \`ListItem\`
+- Selection: \`Tabs\`, \`Switch\`, \`Checkbox\`, \`Radio\`, \`RadioGroup\`
+- States: \`Skeleton\`, \`EmptyState\`
+- Overlays: \`Modal\`, \`BottomSheet\`, \`ToastProvider\`, \`useToast\`
+- Navigation: \`AppHeader\`, \`BottomNavigation\`
+- Layout patterns: \`PageLayout\`, \`Section\`, \`Form\`
+- Telegram adapters: \`TelegramMainButton\`, \`TelegramBackButton\`, \`haptics\`
+
+## Example
+
+\`\`\`tsx
+import { Button, Card, Input, ToastProvider, useToast } from "./components";
+
+function ProfileForm() {
+  const toast = useToast();
+
   return (
     <Card>
-      <Input label="Email" placeholder="you@example.com" />
-      <Button onClick={() => show("Saved", "success")}>Save</Button>
+      <Input label="Name" placeholder="Your name" />
+      <Button onClick={() => toast.show("Saved", "success")}>Save</Button>
     </Card>
   );
 }
 
-// Wrap the app once:
-<ToastProvider><Example /></ToastProvider>
-```
+export function App() {
+  return (
+    <ToastProvider>
+      <ProfileForm />
+    </ToastProvider>
+  );
+}
+\`\`\`
 
-## Theme modes
+## Themes and design tokens
 
-Set the root attribute before rendering:
+All design values are CSS custom properties in \`src/styles/tokens.css\`:
 
-```js
-document.documentElement.dataset.theme = "dark"; // or "light" / "telegram"
-```
+- Light and dark palettes
+- Telegram theme parameter mapping
+- Typography scale and system font stack
+- 4px spacing scale
+- Radius, shadow and semantic status tokens
+- Viewport and safe-area variables
 
-Telegram mode reads the standard `--tg-theme-*` CSS variables. If you use Telegram's theme parameters in JS, map them to the matching CSS variables in your app shell.
+Set the root theme attribute to \`light\`, \`dark\` or \`telegram\`:
+
+\`\`\`ts
+document.documentElement.dataset.theme = "dark";
+\`\`\`
+
+The Telegram mode reads \`--tg-theme-*\` variables. \`initTelegram()\` also maps \`WebApp.themeParams\`, listens for theme and viewport changes, and synchronizes safe-area insets.
 
 ## Telegram integration
 
-Call `initTelegram()` once on app startup. The adapters safely no-op outside Telegram:
+The Telegram bridge script is included in \`index.html\` before the app bundle. Call \`initTelegram()\` once from the app shell; it returns a cleanup function.
 
-- `haptics.light()`, `haptics.selection()`, `haptics.success()`
-- `TelegramMainButton` syncs Telegram's native MainButton
-- `AppHeader` can register a Telegram BackButton callback
+\`\`\`tsx
+import { useEffect } from "react";
+import { initTelegram } from "./lib/telegram";
 
-Load Telegram's Web App script in your HTML before your application bundle:
+useEffect(() => initTelegram(), []);
+\`\`\`
 
-```html
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-```
+Adapters safely no-op when the app is opened outside Telegram:
+
+\`\`\`tsx
+<TelegramMainButton text="Continue" onClick={submit} />
+<TelegramBackButton onClick={goBack} />
+\`\`\`
+
+Haptic methods: \`haptics.light()\`, \`haptics.medium()\`, \`haptics.success()\`, \`haptics.error()\`, \`haptics.warning()\`, \`haptics.selection()\`.
 
 ## Project structure
 
-```
+\`\`\`text
 src/
-  components/ui.tsx
-  lib/telegram.ts
+  components/
+    index.ts
+    patterns.tsx
+    ui.tsx
+  lib/
+    telegram.ts
   styles/
-    tokens.css
     global.css
+    tokens.css
   App.tsx
   main.tsx
-```
+\`\`\`
 
-## Notes
+## Production notes
 
-This repository is a starter UI kit, not a complete production framework. Review focus management, form validation, localization, and app-specific Telegram behavior before shipping a production Mini App.
+The catalogue is a visual and interaction playground, not a complete application framework. Add product-specific validation, localization, analytics and routing as needed. For production dialogs, review focus management and add a focus trap if the surrounding application requires strict modal accessibility.
