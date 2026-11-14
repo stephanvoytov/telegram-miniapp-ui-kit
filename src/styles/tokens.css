@@ -1,26 +1,42 @@
 :root {
   color-scheme: light;
-  --ui-bg: #f5f6f8;
+  --ui-bg: #ffffff;
   --ui-surface: #ffffff;
-  --ui-surface-2: #f0f2f5;
+  --ui-surface-2: #f5f7fa;
+  --ui-surface-3: #eef2f6;
   --ui-text: #17191c;
-  --ui-muted: #818894;
-  --ui-border: #e7e9ed;
+  --ui-muted: #858b95;
+  --ui-hint: #aeb4bd;
+  --ui-border: #e9edf1;
   --ui-primary: #2aabee;
-  --ui-primary-hover: #168dcc;
-  --ui-primary-soft: #e9f6fd;
-  --ui-success: #159b68;
-  --ui-success-soft: #e8f7f0;
-  --ui-warning: #bd7b1e;
-  --ui-warning-soft: #fff5e5;
-  --ui-danger: #d94b55;
+  --ui-primary-hover: #229ed9;
+  --ui-primary-soft: #eaf6fd;
+  --ui-primary-contrast: #ffffff;
+  --ui-link: #229ed9;
+  --ui-success: #31b66a;
+  --ui-success-soft: #eaf8f0;
+  --ui-warning: #f0a33a;
+  --ui-warning-soft: #fff5e8;
+  --ui-danger: #e45454;
   --ui-danger-soft: #fff0f0;
-  --ui-radius-sm: 10px;
-  --ui-radius-md: 14px;
-  --ui-radius-lg: 18px;
-  --ui-radius-xl: 24px;
-  --ui-shadow-card: 0 2px 12px rgba(20, 30, 45, .045);
+
   --ui-font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ui-font-size-xs: 12px;
+  --ui-font-size-sm: 13px;
+  --ui-font-size-md: 15px;
+  --ui-font-size-lg: 17px;
+  --ui-font-size-xl: 20px;
+  --ui-font-size-2xl: 24px;
+  --ui-font-size-3xl: 28px;
+  --ui-line-height-tight: 1.2;
+  --ui-line-height-normal: 1.45;
+  --ui-line-height-relaxed: 1.6;
+  --ui-font-weight-normal: 400;
+  --ui-font-weight-medium: 550;
+  --ui-font-weight-semibold: 650;
+  --ui-font-weight-bold: 700;
+
+  --ui-space-0: 0;
   --ui-space-1: 4px;
   --ui-space-2: 8px;
   --ui-space-3: 12px;
@@ -28,35 +44,68 @@
   --ui-space-5: 20px;
   --ui-space-6: 24px;
   --ui-space-8: 32px;
-  --tg-viewport-height: 100dvh;
+  --ui-space-10: 40px;
+  --ui-space-12: 48px;
+
+  --ui-radius-sm: 8px;
+  --ui-radius-md: 10px;
+  --ui-radius-lg: 12px;
+  --ui-radius-xl: 16px;
+  --ui-radius-2xl: 18px;
+  --ui-radius-full: 999px;
+
+  --ui-shadow-card: 0 1px 2px rgba(23, 25, 28, 0.035);
+  --ui-shadow-overlay: 0 16px 48px rgba(16, 24, 32, 0.18);
+
+  --ui-content-width: 520px;
+  --ui-viewport-height: 100dvh;
+  --ui-safe-top: max(env(safe-area-inset-top, 0px), var(--ui-tg-safe-top, 0px), var(--ui-tg-content-safe-top, 0px));
+  --ui-safe-right: max(env(safe-area-inset-right, 0px), var(--ui-tg-safe-right, 0px), var(--ui-tg-content-safe-right, 0px));
+  --ui-safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--ui-tg-safe-bottom, 0px), var(--ui-tg-content-safe-bottom, 0px));
+  --ui-safe-left: max(env(safe-area-inset-left, 0px), var(--ui-tg-safe-left, 0px), var(--ui-tg-content-safe-left, 0px));
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --ui-bg: #111315;
-  --ui-surface: #1b1e21;
-  --ui-surface-2: #25292d;
-  --ui-text: #f3f5f7;
-  --ui-muted: #969da6;
-  --ui-border: #30353a;
-  --ui-primary: #36aeea;
-  --ui-primary-hover: #65c1f0;
-  --ui-primary-soft: #173444;
-  --ui-success: #4cc493;
-  --ui-success-soft: #18382d;
-  --ui-warning: #e5ae5a;
-  --ui-warning-soft: #3a2d19;
-  --ui-danger: #f0787f;
-  --ui-danger-soft: #3b2225;
-  --ui-shadow-card: 0 2px 16px rgba(0, 0, 0, .18);
+  --ui-bg: #17212b;
+  --ui-surface: #1d2935;
+  --ui-surface-2: #202b36;
+  --ui-surface-3: #263544;
+  --ui-text: #ffffff;
+  --ui-muted: #8b9bab;
+  --ui-hint: #708499;
+  --ui-border: #2b3947;
+  --ui-primary: #2aabee;
+  --ui-primary-hover: #229ed9;
+  --ui-primary-soft: #203c4e;
+  --ui-primary-contrast: #ffffff;
+  --ui-link: #55b8ed;
+  --ui-success: #50c987;
+  --ui-success-soft: #1d3a30;
+  --ui-warning: #f0b35f;
+  --ui-warning-soft: #40331f;
+  --ui-danger: #f07878;
+  --ui-danger-soft: #43292d;
+  --ui-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --ui-shadow-overlay: 0 16px 48px rgba(0, 0, 0, 0.4);
 }
 
 :root[data-theme="telegram"] {
-  --ui-bg: var(--tg-theme-bg-color, #f5f6f8);
-  --ui-surface: var(--tg-theme-secondary-bg-color, #fff);
+  color-scheme: light dark;
+  --ui-bg: var(--tg-theme-bg-color, #ffffff);
+  --ui-surface: var(--tg-theme-section-bg-color, var(--tg-theme-bg-color, #ffffff));
+  --ui-surface-2: var(--tg-theme-secondary-bg-color, #f5f7fa);
+  --ui-surface-3: var(--tg-theme-header-bg-color, var(--ui-surface-2));
   --ui-text: var(--tg-theme-text-color, #17191c);
-  --ui-muted: var(--tg-theme-hint-color, #818894);
+  --ui-muted: var(--tg-theme-hint-color, #858b95);
+  --ui-hint: var(--tg-theme-subtitle-text-color, #aeb4bd);
+  --ui-border: var(--tg-theme-section-separator-color, color-mix(in srgb, var(--ui-muted) 20%, transparent));
   --ui-primary: var(--tg-theme-button-color, #2aabee);
-  --ui-primary-hover: var(--tg-theme-button-color, #168dcc);
-  --ui-border: color-mix(in srgb, var(--ui-muted) 18%, transparent);
+  --ui-primary-hover: var(--tg-theme-button-color, #229ed9);
+  --ui-primary-soft: color-mix(in srgb, var(--ui-primary) 12%, var(--ui-surface));
+  --ui-primary-contrast: var(--tg-theme-button-text-color, #ffffff);
+  --ui-link: var(--tg-theme-link-color, var(--ui-primary));
+  --ui-success: #31b66a;
+  --ui-warning: #f0a33a;
+  --ui-danger: var(--tg-theme-destructive-text-color, #e45454);
 }
